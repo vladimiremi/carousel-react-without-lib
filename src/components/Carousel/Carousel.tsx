@@ -1,14 +1,20 @@
-import { useRef, useState } from "react";
-import { woman } from "../../assets";
+import { ReactChild, useRef, useState } from "react";
+
 import { IconLeft, IconRight } from "../../assets/icons";
 import * as S from "./Carousel.styled";
 
-export function Carousel() {
+interface CarouselProps {
+  children: any;
+}
+
+export function Carousel({ children }: CarouselProps) {
   const refContainer = useRef<HTMLDivElement>(
     null
   ) as React.MutableRefObject<HTMLInputElement>;
 
   const [scrollX, setScrollX] = useState(0);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
 
   const handleScroll = (ref: any) => {};
 
@@ -16,8 +22,11 @@ export function Carousel() {
     let x = scrollX - Math.round(window.innerWidth / 2);
     console.log({ x });
 
+    setShowRightArrow(true);
+
     if (x < 0) {
       x = 0;
+      setShowLeftArrow(false);
     }
     refContainer.current.scrollTo({
       top: 0,
@@ -34,11 +43,16 @@ export function Carousel() {
 
     const sizeScrollX = refContainer.current.scrollWidth;
 
+    const paddingSize = 32;
+
+    setShowLeftArrow(true);
+
     if (x > sizeScrollX - window.innerWidth) {
-      x = sizeScrollX - window.innerWidth + 32;
+      x = sizeScrollX - window.innerWidth + paddingSize;
+
+      setShowRightArrow(false);
     }
 
-    console.log({ x });
     refContainer.current.scrollTo({
       top: 0,
       left: x,
@@ -48,50 +62,30 @@ export function Carousel() {
     setScrollX(x);
   };
 
+  console.log({ children });
+
   return (
     <S.ContainerCarousel>
-      <S.Carousel width={"30vw"} ref={refContainer}>
-        <div className="card">
-          <img src={woman} alt="Mulher feliz" />
-        </div>
-        <div className="card">
-          <img src={woman} alt="Mulher feliz" />
-        </div>
-        <div className="card">
-          <img src={woman} alt="Mulher feliz" />
-        </div>
-        <div className="card">
-          <img src={woman} alt="Mulher feliz" />
-        </div>
-        <div className="card">
-          <img src={woman} alt="Mulher feliz" />
-        </div>
-        <div className="card">
-          <img src={woman} alt="Mulher feliz" />
-        </div>
-        <div className="card">
-          <img src={woman} alt="Mulher feliz" />
-        </div>
-        <div className="card">
-          <img src={woman} alt="Mulher feliz" />
-        </div>
-        <div className="card">
-          <img src={woman} alt="Mulher feliz" />
-        </div>
-        <div className="card">
-          <img src={woman} alt="Mulher feliz" />
-        </div>
-        <div className="card">
-          <img src={woman} alt="Mulher feliz" />
-        </div>
+      <S.Carousel ref={refContainer}>
+        {children.length > 0 &&
+          children.map((item: ReactChild, index: number) => (
+            <div key={index} style={{ scrollSnapAlign: "start" }}>
+              {item}
+            </div>
+          ))}
       </S.Carousel>
-      <S.LeftArrow className="left-arrow" onClick={handleLeftArrow}>
-        <IconLeft width={15} />
-      </S.LeftArrow>
 
-      <S.RightArrow className="right-arrow" onClick={handleRightArrow}>
-        <IconRight width={15} />
-      </S.RightArrow>
+      {showLeftArrow && (
+        <S.LeftArrow className="left-arrow" onClick={handleLeftArrow}>
+          <IconLeft width={15} />
+        </S.LeftArrow>
+      )}
+
+      {showRightArrow && (
+        <S.RightArrow className="right-arrow" onClick={handleRightArrow}>
+          <IconRight width={15} color="black" />
+        </S.RightArrow>
+      )}
     </S.ContainerCarousel>
   );
 }

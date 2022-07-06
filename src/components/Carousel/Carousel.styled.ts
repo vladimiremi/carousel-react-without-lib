@@ -1,12 +1,8 @@
 import styled from "styled-components";
 
-interface CarouselProps {
-  width: string;
-}
-
 export const ContainerCarousel = styled.div`
   position: relative;
-  padding: 1rem;
+  padding: 0 1rem;
   display: flex;
 
   &:hover {
@@ -17,10 +13,10 @@ export const ContainerCarousel = styled.div`
   }
 `;
 
-export const Carousel = styled.div<CarouselProps>`
+export const Carousel = styled.div`
   display: flex;
-  /* background: red; */
-  gap: 0.5rem;
+
+  gap: 0.8rem;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
@@ -30,46 +26,32 @@ export const Carousel = styled.div<CarouselProps>`
   padding-left: 2rem;
   padding-right: 1rem;
   position: relative;
-
-  div {
-    width: ${(props) => props.width || "70vw"};
-
-    flex: none;
-    border-radius: 18px;
-    flex-shrink: 0;
-    scroll-snap-align: start;
-
-    img {
-      width: 100%;
-      height: 100%;
-      border-radius: 18px;
-      pointer-events: none;
-    }
-  }
 `;
 
 export const LeftArrow = styled.section`
   cursor: pointer;
   position: absolute;
   left: -0;
-  top: 40%;
+  height: 100%;
   z-index: 2;
   opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #000000;
+  /* background-color: #00000073; */
+  transition: all ease 0.5s;
 `;
 
 export const RightArrow = styled.section`
   cursor: pointer;
   position: absolute;
   right: -0;
-  top: 40%;
+  height: 100%;
   z-index: 2;
   opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #000000;
+  /* background-color: #000000; */
+  transition: all ease 0.5s;
 `;
