@@ -1,4 +1,5 @@
 import { ReactChild, useRef, useState } from "react";
+import ScrollContainer from "react-indiana-drag-scroll";
 
 import { IconLeft, IconRight } from "../../assets/icons";
 import * as S from "./Carousel.styled";
@@ -8,6 +9,9 @@ interface CarouselProps {
 }
 
 export function Carousel({ children }: CarouselProps) {
+  const refCarousel = useRef<HTMLDivElement>(
+    null
+  ) as React.MutableRefObject<HTMLInputElement>;
   const refContainer = useRef<HTMLDivElement>(
     null
   ) as React.MutableRefObject<HTMLInputElement>;
@@ -19,7 +23,7 @@ export function Carousel({ children }: CarouselProps) {
   const handleScroll = (ref: any) => {};
 
   const handleLeftArrow = () => {
-    let x = scrollX - Math.round(window.innerWidth / 2);
+    let x = scrollX - Math.round(refContainer.current.scrollWidth / 2);
     console.log({ x });
 
     setShowRightArrow(true);
@@ -28,7 +32,7 @@ export function Carousel({ children }: CarouselProps) {
       x = 0;
       setShowLeftArrow(false);
     }
-    refContainer.current.scrollTo({
+    refCarousel.current.scrollTo({
       top: 0,
       left: x,
       behavior: "smooth",
@@ -38,22 +42,22 @@ export function Carousel({ children }: CarouselProps) {
   };
 
   const handleRightArrow = () => {
-    let x = scrollX + Math.round(window.innerWidth / 2);
-    console.log(refContainer.current.scrollWidth);
+    let x = scrollX + Math.round(refContainer.current.scrollWidth / 2);
+    console.log(refCarousel.current.scrollWidth);
 
-    const sizeScrollX = refContainer.current.scrollWidth;
+    const sizeScrollX = refCarousel.current.scrollWidth;
 
     const paddingSize = 32;
 
     setShowLeftArrow(true);
 
-    if (x > sizeScrollX - window.innerWidth) {
-      x = sizeScrollX - window.innerWidth + paddingSize;
+    if (x > sizeScrollX - refContainer.current.scrollWidth) {
+      x = sizeScrollX - refContainer.current.scrollWidth + paddingSize;
 
       setShowRightArrow(false);
     }
 
-    refContainer.current.scrollTo({
+    refCarousel.current.scrollTo({
       top: 0,
       left: x,
       behavior: "smooth",
@@ -65,8 +69,8 @@ export function Carousel({ children }: CarouselProps) {
   console.log({ children });
 
   return (
-    <S.ContainerCarousel>
-      <S.Carousel ref={refContainer}>
+    <S.ContainerCarousel ref={refContainer}>
+      <S.Carousel ref={refCarousel}>
         {children.length > 0 &&
           children.map((item: ReactChild, index: number) => (
             <div key={index} style={{ scrollSnapAlign: "start" }}>

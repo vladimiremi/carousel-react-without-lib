@@ -9,7 +9,7 @@ function App() {
   const itens = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   return (
-    <div>
+    <S.Container>
       <Carousel>
         {itens.map((item, index) => (
           <S.ItemCarrousel className="card" key={index}>
@@ -19,7 +19,7 @@ function App() {
           </S.ItemCarrousel>
         ))}
       </Carousel>
-    </div>
+    </S.Container>
   );
 }
 
