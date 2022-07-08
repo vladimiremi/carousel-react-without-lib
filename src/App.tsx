@@ -12,7 +12,11 @@ function App() {
     <S.Container>
       <Carousel>
         {itens.map((item, index) => (
-          <S.ItemCarrousel className="card" key={index}>
+          <S.ItemCarrousel
+            className="card"
+            width={window.innerWidth / 4}
+            key={index}
+          >
             <div>
               <img src={woman} alt="Mulher feliz" />
             </div>

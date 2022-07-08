@@ -1,5 +1,4 @@
 import { ReactChild, useRef, useState } from "react";
-import ScrollContainer from "react-indiana-drag-scroll";
 
 import { IconLeft, IconRight } from "../../assets/icons";
 import * as S from "./Carousel.styled";
@@ -73,7 +72,13 @@ export function Carousel({ children }: CarouselProps) {
       <S.Carousel ref={refCarousel}>
         {children.length > 0 &&
           children.map((item: ReactChild, index: number) => (
-            <div key={index} style={{ scrollSnapAlign: "start" }}>
+            <div
+              key={index}
+              style={{
+                scrollSnapAlign: "center",
+                scrollMarginBlockStart: "30px",
+              }}
+            >
               {item}
             </div>
           ))}

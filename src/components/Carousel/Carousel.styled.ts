@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ContainerCarousel = styled.div`
   position: relative;
-  padding: 0 1rem;
+
   display: flex;
 
   &:hover {
@@ -23,17 +23,17 @@ export const Carousel = styled.div`
   ::-webkit-scrollbar {
     height: 0px;
   }
-  padding-left: 2rem;
-  padding-right: 1rem;
-  position: relative;
+  padding-left: 3rem;
+  padding-right: 3rem;
 `;
 
 export const LeftArrow = styled.section`
   cursor: pointer;
   position: absolute;
-  left: -0;
+  left: 2vw;
   height: 100%;
-  z-index: 2;
+  z-index: 999;
+
   opacity: 0;
   display: flex;
   align-items: center;
@@ -45,13 +45,14 @@ export const LeftArrow = styled.section`
 export const RightArrow = styled.section`
   cursor: pointer;
   position: absolute;
-  right: -0;
+  right: 2vw;
   height: 100%;
-  z-index: 2;
+  z-index: 999;
   opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 5vw;
   /* background-color: #000000; */
   transition: all ease 0.5s;
 `;

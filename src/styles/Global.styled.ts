@@ -1,7 +1,14 @@
 import styled from "styled-components";
 
-export const ItemCarrousel = styled.div`
-  width: 20vw;
+interface ItemCarrouselProps {
+  width: number;
+}
+
+export const ItemCarrousel = styled.div<ItemCarrouselProps>`
+  * {
+    margin: 0;
+  }
+  width: 30vh;
   margin: 1rem 0;
   flex: none;
   border-radius: 18px;
@@ -25,5 +32,6 @@ export const ItemCarrousel = styled.div`
 `;
 
 export const Container = styled.div`
-  /* width: 50%; */
+  width: 103%;
+  overflow: hidden;
 `;
