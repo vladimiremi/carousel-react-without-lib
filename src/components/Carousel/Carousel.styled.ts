@@ -30,7 +30,7 @@ export const Carousel = styled.div`
 export const LeftArrow = styled.section`
   cursor: pointer;
   position: absolute;
-  left: 2vw;
+  left: -0;
   height: 100%;
   z-index: 999;
 
@@ -45,7 +45,7 @@ export const LeftArrow = styled.section`
 export const RightArrow = styled.section`
   cursor: pointer;
   position: absolute;
-  right: 2vw;
+  right: -0;
   height: 100%;
   z-index: 999;
   opacity: 0;

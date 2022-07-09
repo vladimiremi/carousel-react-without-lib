@@ -1,15 +1,29 @@
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 
 interface ItemCarrouselProps {
   width: number;
 }
 
-export const ItemCarrousel = styled.div<ItemCarrouselProps>`
-  * {
+export const GlobalStyle = createGlobalStyle`
+   body {
     margin: 0;
+    padding: 3;
+    background: rgb(26, 29, 41);
+    font-family: Open-Sans, Helvetica, Sans-Serif;
+    .slick-prev {
+      left: 0.8% !important;
+      z-index: 1;
+    }
+    .slick-next {
+      right: 0.8% !important;
+      z-index: 1;
+    }
   }
+`;
+
+export const ItemCarrousel = styled.div<ItemCarrouselProps>`
   width: 30vh;
-  margin: 1rem 0;
+  margin: 1rem 0 !important;
   flex: none;
   border-radius: 18px;
   flex-shrink: 0;
@@ -17,10 +31,10 @@ export const ItemCarrousel = styled.div<ItemCarrouselProps>`
   position: relative;
   transition: all ease 0.5s;
 
-  &:hover {
+  /* &:hover {
     transform: scale(1.04);
     z-index: 999;
-  }
+  } */
 
   img {
     width: 100%;
@@ -32,6 +46,6 @@ export const ItemCarrousel = styled.div<ItemCarrouselProps>`
 `;
 
 export const Container = styled.div`
-  width: 103%;
-  overflow: hidden;
+  width: 100%;
+  /* overflow: hidden; */
 `;
